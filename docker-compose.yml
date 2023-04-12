@@ -1,0 +1,62 @@
+version: "3.8"
+
+networks:
+  docknode-avax:
+    driver: bridge
+
+volumes:
+  avalanchego_data: {}
+  caddy_data: {}
+  caddy_config: {}
+
+services:
+  avalanchego:
+    image: "avaplatform/avalanchego:latest"
+    restart: unless-stopped
+    expose:
+      - 9650
+    volumes:
+      - 'avalanchego_data:/root/.avalanchego'
+    command: > 
+      /avalanchego/build/avalanchego
+      --data-dir=/root/.avalanchego
+      --staking-enabled=false
+      --http-host=0.0.0.0
+    networks:
+      - docknode-avax
+    depends_on:
+      - caddy
+
+  nodeexporter:
+    image: prom/node-exporter:v1.5.0
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    expose:
+      - 9100
+    networks:
+      - docknode-avax
+
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+      - "9100:9100"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - METRICS_USERS=${METRICS_USERS:?err}
+      - RPC_USERS=${RPC_USERS:?err}
+      - HOST=${HOST:?err}
+    networks:
+      - docknode-avax
