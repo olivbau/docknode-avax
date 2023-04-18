@@ -17,10 +17,10 @@ services:
       - 9650
     volumes:
       - 'avalanchego_data:/root/.avalanchego'
-    command:
-      - /avalanchego/build/avalanchego
-      - --data-dir=/root/.avalanchego
-      - --http-host=0.0.0.0
+    command: >
+      /avalanchego/build/avalanchego
+      --data-dir=/root/.avalanchego
+      --http-host=0.0.0.0
     networks:
       - docknode-avax
     depends_on:
