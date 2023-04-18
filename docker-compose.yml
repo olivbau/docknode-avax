@@ -18,8 +18,6 @@ services:
     volumes:
       - 'avalanchego_data:/root/.avalanchego'
     command: > 
-      /avalanchego/build/avalanchego
-      -- help
       --data-dir=/root/.avalanchego
       --staking-enabled=false
       --http-host=0.0.0.0
