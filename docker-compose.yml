@@ -20,7 +20,6 @@ services:
     command:
       - /avalanchego/build/avalanchego
       - --data-dir=/root/.avalanchego
-      - --staking-enabled=false
       - --http-host=0.0.0.0
     networks:
       - docknode-avax
