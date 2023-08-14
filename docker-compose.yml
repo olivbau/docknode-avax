@@ -22,7 +22,6 @@ services:
       --data-dir=/root/.avalanchego
       --http-host=0.0.0.0
       --http-port=9650
-      --help
     networks:
       - docknode-avax
     depends_on:
