@@ -21,6 +21,8 @@ services:
       /avalanchego/build/avalanchego
       --data-dir=/root/.avalanchego
       --http-host=0.0.0.0
+      --http-port=9650
+      --staking-enabled=false
     networks:
       - docknode-avax
     depends_on:

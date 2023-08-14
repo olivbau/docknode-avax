@@ -2,12 +2,13 @@
 
 ## Endpoints
 
-* Fullnode: `https://mydomain.com`
-* Node exporter: `https://mydomain.com:9100/metrics`
+- Fullnode: `https://mydomain.com`
+- Node exporter: `https://mydomain.com:9100/metrics`
 
-## Install 
+## Install
 
 0. VPS config (optional)
+
 ```bash
 apt update
 apt upgrade
@@ -20,12 +21,14 @@ apt update && apt upgrade -y && apt install -y git
 ```
 
 1. Clone the repository and
+
 ```bash
 git clone https://github.com/olivbau/docknode-avax.git
 cd docknode-avax
 ```
 
 2. Configure environement variables
+
 ```bash
 cp .env.example .env
 
@@ -40,6 +43,7 @@ nano .env
 ```
 
 3. Setup UFW
+
 ```bash
 ufw allow ssh
 ufw deny 9650
@@ -47,6 +51,7 @@ ufw enable
 ```
 
 4. Run
+
 ```bash
 docker compose pull
 docker compose up -d
