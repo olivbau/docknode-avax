@@ -2,7 +2,7 @@
 
 ## Endpoints
 
-- Fullnode: `https://mydomain.com`
+- Fullnode: `https://mydomain.com/ext/bc/C/rpc`
 - Node exporter: `https://mydomain.com:9100/metrics`
 
 ## Install
